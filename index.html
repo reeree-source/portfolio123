@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 
+      Update this title. It's what shows up in the browser tab.
+    --><title>Shane - Artist Portfolio</title>
+    
+    <!-- Tailwind CSS CDN --><script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts - Inter --><link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Set default font */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Custom animation classes for scroll-triggered fade-in */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            visibility: hidden; /* Hide element until it's visible */
+        }
+        
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+            visibility: visible;
+        }
+
+        /* Custom keyframes for hero text animation */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Applying the hero animations */
+        .animate-hero-title {
+            animation: fadeInDown 0.8s ease-out;
+        }
+        .animate-hero-subtitle {
+            animation: fadeInDown 0.8s ease-out 0.2s;
+            animation-fill-mode: backwards; /* Starts animation after delay */
+        }
+        .animate-hero-button {
+            animation: fadeInUp 0.8s ease-out 0.4s;
+            animation-fill-mode: backwards;
+        }
+
+        /* NEW: Carousel Animation */
+        .carousel-track {
+            /* 40s duration, linear speed, repeats forever */
+            animation: scroll 40s linear infinite;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0%);
+            }
+            100% {
+                /* We have 4 images (3 original + 1 duplicate). 
+                   To show all 3 unique images, we move 3/4 of the total width = 75% */
+                transform: translateX(-75%);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 font-sans antialiased">
+
+    <!-- 
+      Header & Navigation 
+      Stays at the top while you scroll, with a blur effect.
+    --><header class="sticky top-0 z-50 w-full bg-gray-900/80 backdrop-blur-md shadow-md">
+        <nav class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <!-- 
+                  Update with your name or logo 
+                --><a href="#home" class="text-2xl font-bold text-white transition-colors duration-300 hover:text-blue-400">
+                    Shane's Artworks
+                </a>
+                
+                <!-- Navigation Links --><div class="hidden space-x-6 md:flex">
+                    <a href="#about" class="text-gray-300 transition-colors duration-300 hover:text-blue-400">About</a>
+                    <a href="#portfolio" class="text-gray-300 transition-colors duration-300 hover:text-blue-400">Portfolio</a>
+                    <a href="#contact" class="text-gray-300 transition-colors duration-300 hover:text-blue-400">Contact</a>
+                </div>
+
+                <!-- Mobile Menu Button (Optional, for simplicity we'll keep it hidden) --><!-- <button class="md:hidden">...</button> --></div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+
+        <!-- 
+          Hero Section 
+          Your main introduction.
+          NOW with carousel background
+        --><section id="home" class="relative min-h-screen flex flex-col justify-center items-center text-center overflow-hidden">
+            
+            <!-- 1. Carousel Background (z-10) --><div class="absolute top-0 left-0 w-full h-full z-10">
+                <!-- Track width is 400% (4 images * 100% width) --><div class="carousel-track flex h-full w-[400%]">
+                    <!-- Images from your portfolio. Each is 1/4 (25%) of the track width --><img src="img/carousel1.png" class="w-[25%] h-full object-cover" alt="Showcase Art 1" onerror="this.style.display='none'">
+                    <img src="img/carousel2.jpg" class="w-[25%] h-full object-cover" alt="Showcase Art 2" onerror="this.style.display='none'">
+                    <img src="img/carousel3.jpg" class="w-[25%] h-full object-cover" alt="Showcase Art 3" onerror="this.style.display='none'">
+                    <img src="img/carousel4.jpg" class="w-[25%] h-full object-cover" alt="Showcase Art 1" onerror="this.style.display='none'">
+                    <img src="img/carousel5.jpg" class="w-[25%] h-full object-cover" alt="Showcase Art 2" onerror="this.style.display='none'">
+                    <img src="img/carousel6.jpg" class="w-[25%] h-full object-cover" alt="Showcase Art 3" onerror="this.style.display='none'">
+                     <img src="img/carousel7.png" class="w-[25%] h-full object-cover" alt="Showcase Art 2" onerror="this.style.display='none'">
+                    <img src="img/carousel8.png" class="w-[25%] h-full object-cover" alt="Showcase Art 3" onerror="this.style.display='none'">
+                    <!-- Duplicate the first image at the end for a seamless loop --><img src="img/carousel1.png" class="w-[25%] h-full object-cover" alt="Showcase Art 1 (Duplicate)" onerror="this.style.display='none'">
+                </div>
+            </div>
+
+            <!-- 2. Dark Overlay (z-20) --><!-- This sits on top of the carousel to make text readable --><div class="absolute top-0 left-0 w-full h-full bg-gray-900/70 z-20"></div>
+
+            <!-- 3. Hero Content (z-30) --><!-- This container sits on top of the overlay --><div class="relative z-30 flex flex-col justify-center items-center text-center px-4">
+                <!-- 
+                  Update with your name and title/role.
+                --><h1 class="text-5xl font-extrabold md:text-7xl animate-hero-title">
+                    Hi, I'm <span class="text-blue-400">Shane Danielle Lucero</span>
+                </h1>
+                <p class="mt-4 text-2xl md:text-3xl text-gray-300 animate-hero-subtitle">
+                    Illustrator & Digital Artist
+                </p>
+                <p class="mt-6 max-w-2xl text-lg text-gray-400 animate-hero-subtitle">
+                    I create vibrant characters and imaginative worlds through digital illustration.
+                </p>
+                
+                <!-- Call to Action Button --><a href="#portfolio" class="mt-10 inline-block rounded-full bg-blue-600 px-8 py-4 text-lg font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 animate-hero-button">
+                    View My Work
+                </a>
+            </div>
+        </section>
+
+        <!-- 
+          About Me Section 
+        --><section id="about" class="py-24 fade-in-section">
+            <h2 class="mb-12 text-center text-4xl font-bold">About Me</h2>
+            <div class="flex flex-col items-center gap-12 md:flex-row">
+                <!-- 
+                  Update with a link to your photo. 
+                  You can use a service like Imgur or even a path from your GitHub repo.
+                --><div class="w-full md:w-1/3">
+                    <img 
+                        src="img/avatar.jpg" 
+                        alt="A portrait of Shane's Cat" 
+                        class="h-auto w-full max-w-xs mx-auto rounded-lg shadow-2xl"
+                        onerror="this.src='https://placehold.co/400x400/1e293b/93c5fd?text=Image+Error'"
+                    >
+                </div>
+                <!-- 
+                  Update this with your personal bio.
+                --><div class="w-full md:w-2/3">
+                    <p class="mb-6 text-lg text-gray-300">
+Hello, I'm Shane Danielle D.G. Lucero, 24 years old Student of College of the Immaculate Conception and Welcome to my portfolio. 
+</p>
+                    <p class="mb-6 text-lg text-gray-300">
+I'm from BSIT, student in my 2nd year and I major in animation, art is my passion and hobby feel free to check out some of the personal arts I made as I am into games, anime and drawing some of my ocs as well. 
+                    </p>
+                    <p class="text-lg text-gray-300">
+Something about me, I prefer going out to have different perspectives specially when drawing instead of at home since the change of scenery help's and being by my friends side and hearing they're comments to improve my art helps alot to expand my understanding of better point of view. 
+</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 
+          Skills Section (REMOVED)
+        --><!-- 
+          Portfolio Section 
+          This is where you show off your work.
+        --><section id="portfolio" class="py-24">
+            <h2 class="mb-12 text-center text-4xl font-bold">My Portfolio</h2>
+            
+            <div class="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3">
+                
+                <!-- Portfolio Piece 1 --><div class="flex flex-col overflow-hidden rounded-lg bg-gray-800 shadow-xl transition-transform duration-500 hover:scale-[1.03] fade-in-section">
+                    <!-- 
+                      Update image: 600x400 placeholder.
+                    --><img 
+                        src="img/art1.jpg" 
+                        alt="Artwork 1" 
+                        class="h-56 w-full object-cover"
+                        onerror="this.src='https://placehold.co/600x400/1e293b/93c5fd?text=Image+Error'"
+                    >
+                    
+                    <div class="flex flex-1 flex-col p-6">
+                        <!-- 
+                          Update project details 
+                        --><h3 class="text-2xl font-semibold mb-2">Hades and Persephone</h3>
+                        <p class="text-gray-400 mb-4 flex-1">
+                           Greek couple.
+                        </p>
+                        
+                        <!-- Tech Tags --><div class="flex flex-wrap gap-2 mb-6">
+                            <span class="rounded-full bg-blue-900 px-3 py-1 text-sm font-medium text-blue-300">Lore Olympus</span>
+                            <span class="rounded-full bg-blue-900 px-3 py-1 text-sm font-medium text-blue-300">Character Design</span>
+                        </div>
+                        
+                        <!-- Links --><div class="flex gap-4">
+                            <a href="#" class="inline-flex items-center text-blue-400 transition-colors duration-300 hover:text-blue-300">
+                                <!-- View Details SVG --><svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                </svg>
+                                View Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Portfolio Piece 2 --><div class="flex flex-col overflow-hidden rounded-lg bg-gray-800 shadow-xl transition-transform duration-500 hover:scale-[1.03] fade-in-section" style="transition-delay: 200ms;">
+                    <img 
+                        src="img/art2.jpg" 
+                        alt="Artwork 2" 
+                        class="h-56 w-full object-cover"
+                        onerror="this.src='https://placehold.co/600x400/1e293b/93c5fd?text=Image+Error'"
+                    >
+                    
+                    <div class="flex flex-1 flex-col p-6">
+                        <h3 class="text-2xl font-semibold mb-2">Autumn bridge</h3>
+                        <p class="text-gray-400 mb-4 flex-1">
+                           Tamarack and Layze
+                        </p>
+                        
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="rounded-full bg-blue-900 px-3 py-1 text-sm font-medium text-blue-300">QL2</span>
+                            <span class="rounded-full bg-blue-900 px-3 py-1 text-sm font-medium text-blue-300">OC</span>
+                            <span class="rounded-full bg-blue-900 px-3 py-1 text-sm font-medium text-blue-300">Fan Art</span>
+                        </div>
+                        
+                        <div class="flex gap-4">
+                            <a href="#" class="inline-flex items-center text-blue-400 transition-colors duration-300 hover:text-blue-300">
+                                <!-- View Details SVG --><svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                </svg>
+                                View Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Portfolio Piece 3 --><div class="flex flex-col overflow-hidden rounded-lg bg-gray-800 shadow-xl transition-transform duration-500 hover:scale-[1.03] fade-in-section" style="transition-delay: 400ms;">
+                    <img 
+                        src="img/art3.jpg" 
+                        alt="Artwork 3" 
+                        class="h-56 w-full object-cover"
+                        onerror="this.src='https://placehold.co/600x400/1e293b/93c5fd?text=Image+Error'"
+                    >
+                    
+                    <div class="flex flex-1 flex-col p-6">
+                        <h3 class="text-2xl font-semibold mb-2">Haunted Diner</h3>
+                        <p class="text-gray-400 mb-4 flex-1">
+Somewhere in the nowhere.                        </p>
+                        
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="rounded-full bg-blue-900 px-3 py-1 text-sm font-medium text-blue-300">Illustration</span>
+                            <span class="rounded-full bg-blue-900 px-3 py-1 text-sm font-medium text-blue-300">Commission</span>
+                            <span class="rounded-full bg-blue-900 px-3 py-1 text-sm font-medium text-blue-300">Liminal</span>
+                        </div>
+                        
+                        <div class="flex gap-4">
+                            <a href="#" class="inline-flex items-center text-blue-400 transition-colors duration-300 hover:text-blue-300">
+                                <!-- View Details SVG --><svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                </svg>
+                                View Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 
+          Contact Section 
+        --><section id="contact" class="py-24 text-center fade-in-section">
+            <h2 class="mb-6 text-4xl font-bold">Get In Touch</h2>
+            <p class="mb-10 text-lg text-gray-300">
+                I'm currently looking for new opportunities. My inbox is always open, whether you have a question or just want to say hi!
+            </p>
+            
+            <!-- 
+              Update with your email address 
+            --><a href="mailto:18910186@cic.edu.ph" class="inline-block rounded-full bg-blue-600 px-8 py-4 text-lg font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                Say Hello
+            </a>
+
+            <!-- Social Links --><div class="mt-16 flex justify-center space-x-8">
+                <!-- 
+                  Update with your social links 
+                --><a href="#" title="Facebook" class="text-gray-400 transition-colors duration-300 hover:text-blue-400">
+                    <!-- Facebook SVG --><svg class="h-8 w-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor">
+                        <path d="M504 256C504 119 393 8 256 8S8 119 8 256c0 123.78 90.69 226.38 209.25 245V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.28c-30.8 0-40.41 19.12-40.41 38.73V256h68.75l-11 71.69h-57.75V501C413.31 482.38 504 379.78 504 256z"/>
+                    </svg>
+                </a>
+                <a href="#" title="Patreon" class="text-gray-400 transition-colors duration-300 hover:text-blue-400">
+                    <!-- Patreon SVG --><svg class="h-8 w-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor">
+                        <path d="M512 194.8c0 101.3-82.4 183.8-183.8 183.8-101.7 0-184.4-82.4-184.4-183.8 0-101.6 82.7-183.8 184.4-183.8C429.6 11 512 93.2 512 194.8zM0 501V11h68.6v490H0z"/>
+                    </svg>
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 
+      Footer 
+    --><footer class="border-t border-gray-800 py-8">
+        <div class="container mx-auto px-6 text-center text-gray-500">
+            <!-- 
+              Update with your name and the current year. 
+            --><p>&copy; 2025 Shane Danielle Lucero. All rights reserved.</p>
+        </div>
+    </footer>
+
+
+    <!-- 
+      JavaScript for Scroll Animations 
+    --><script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Select all elements you want to animate on scroll
+            const sections = document.querySelectorAll('.fade-in-section');
+
+            // Set up the Intersection Observer
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    // If the element is in viewport
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        // Optional: Stop observing after it has animated
+                        observer.unobserve(entry.target); 
+                    }
+                });
+            }, {
+                // Adjust rootMargin and threshold as needed
+                rootMargin: '0px',
+                threshold: 0.1 // 10% of the element must be visible
+            });
+
+            // Observe each section
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>
